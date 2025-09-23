@@ -1,0 +1,571 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated theme for philosophical dialectical concept with modern aesthetic */
+  --background: oklch(0.98 0.005 240);
+  --foreground: oklch(0.12 0.02 240); /* Increased contrast for better readability */
+  --card: oklch(0.99 0.003 240);
+  --card-foreground: oklch(0.12 0.02 240); /* Increased contrast */
+  --popover: oklch(0.99 0.003 240);
+  --popover-foreground: oklch(0.12 0.02 240); /* Increased contrast */
+  --primary: oklch(0.22 0.1 240); /* Slightly darker for better contrast */
+  --primary-foreground: oklch(0.98 0.005 240);
+  --secondary: oklch(0.88 0.02 240); /* Adjusted for better contrast */
+  --secondary-foreground: oklch(0.15 0.08 240); /* Increased contrast */
+  --muted: oklch(0.94 0.008 240);
+  --muted-foreground: oklch(0.45 0.02 240); /* Increased contrast for better readability */
+  --accent: oklch(0.85 0.02 240); /* Adjusted for better contrast */
+  --accent-foreground: oklch(0.15 0.08 240); /* Increased contrast */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0.01 240);
+  --input: oklch(0.9 0.01 240);
+  --ring: oklch(0.65 0.05 240);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.08 0.01 240);
+  --foreground: oklch(0.98 0.005 240); /* Increased contrast for dark mode */
+  --card: oklch(0.1 0.01 240);
+  --card-foreground: oklch(0.98 0.005 240); /* Increased contrast */
+  --popover: oklch(0.1 0.01 240);
+  --popover-foreground: oklch(0.98 0.005 240); /* Increased contrast */
+  --primary: oklch(0.78 0.08 240); /* Brighter for better contrast in dark mode */
+  --primary-foreground: oklch(0.08 0.01 240);
+  --secondary: oklch(0.25 0.02 240); /* Adjusted for better contrast */
+  --secondary-foreground: oklch(0.98 0.005 240); /* Increased contrast */
+  --muted: oklch(0.15 0.015 240);
+  --muted-foreground: oklch(0.75 0.02 240); /* Increased contrast for better readability */
+  --accent: oklch(0.3 0.025 240); /* Adjusted for better contrast */
+  --accent-foreground: oklch(0.98 0.005 240); /* Increased contrast */
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.18 0.02 240);
+  --input: oklch(0.18 0.02 240);
+  --ring: oklch(0.45 0.05 240);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  /* Updated font configuration for Inter */
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  /* Added smooth scroll behavior for the entire page */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Improved line-height and letter-spacing for Vietnamese text */
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    /* Subtle grid pattern to reduce empty feel on wide screens */
+    background-image:
+      radial-gradient(1px 1px at 25px 25px, oklch(var(--muted-foreground) / 0.06) 1px, transparent 0),
+      radial-gradient(1px 1px at 75px 75px, oklch(var(--muted-foreground) / 0.06) 1px, transparent 0);
+    background-size: 100px 100px;
+  }
+
+  /* Enhanced typography for Vietnamese text */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  p,
+  span,
+  div {
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  /* Ensure proper Vietnamese diacritic rendering */
+  .vietnamese-text {
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Enhanced line-height specifically for Vietnamese text */
+    line-height: 1.8;
+    letter-spacing: 0.015em;
+  }
+}
+
+/* Enhanced animations and effects */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotateY(180deg);
+  }
+}
+
+@keyframes dialectical-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes gradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes floating-shape {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translateY(-10px) rotate(120deg) scale(1.1);
+  }
+  66% {
+    transform: translateY(5px) rotate(240deg) scale(0.9);
+  }
+}
+
+@keyframes particle-float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 1;
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+.dialectical-pulse {
+  animation: dialectical-pulse 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+.floating-shape {
+  animation: floating-shape 8s ease-in-out infinite;
+}
+
+.scroll-animate {
+  transition-property: opacity, transform;
+  transition-duration: 1500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-animate.animate-in {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) !important;
+}
+
+/* Enhanced animations and 3D effects */
+@keyframes particle-physics {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) rotateZ(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-30px) translateX(15px) rotateZ(90deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-20px) rotateZ(180deg);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(20px) translateX(10px) rotateZ(270deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes floating-shape-3d {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg) scale(1) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(90deg) scale(1.1) rotateX(15deg) rotateY(15deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(180deg) scale(0.9) rotateX(30deg) rotateY(30deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(270deg) scale(1.05) rotateX(15deg) rotateY(15deg);
+  }
+}
+
+@keyframes text-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--secondary) / 0.5);
+  }
+}
+
+@keyframes magnetic-pull {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(2deg);
+  }
+  100% {
+    transform: scale(1.1) rotate(-2deg);
+  }
+}
+
+.particle-physics {
+  animation: particle-physics 6s ease-in-out infinite;
+}
+
+.floating-shape-3d {
+  animation: floating-shape-3d 12s ease-in-out infinite;
+}
+
+.text-glow {
+  /* Removed blur animation that was making text hard to read */
+  text-shadow: 0 0 10px hsl(var(--primary) / 0.3);
+}
+
+.magnetic-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.magnetic-hover:hover {
+  animation: magnetic-pull 0.6s ease-in-out;
+  box-shadow: 0 10px 40px hsl(var(--primary) / 0.3);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Enhanced stagger animations */
+.stagger-child {
+  transition-property: opacity, transform;
+  transition-duration: 1000ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stagger-child.animate-in {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) scale(1) !important;
+}
+
+/* Enhanced hover and interaction effects */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+.group:hover .group-hover\:scale-150 {
+  transform: scale(1.5);
+}
+
+.group:hover .group-hover\:rotate-12 {
+  transform: rotate(12deg);
+}
+
+.group:hover .group-hover\:translate-x-1 {
+  transform: translateX(0.25rem);
+}
+
+.group:hover .group-hover\:scale-125 {
+  transform: scale(1.25);
+}
+
+.group:hover .group-hover\:translate-x-2 {
+  transform: translateX(0.5rem);
+}
+
+/* Advanced visual effects */
+.backdrop-blur-xl {
+  backdrop-filter: blur(24px);
+}
+
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-property: transform, opacity, color, background-color, border-color, box-shadow, filter;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, hsl(var(--primary)), hsl(var(--secondary)));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, hsl(var(--secondary)), hsl(var(--accent)));
+}
+
+/* Glowing effects for interactive elements */
+.glow-on-hover {
+  transition: all 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+}
+
+/* Text selection styling */
+::selection {
+  background: hsl(var(--primary) / 0.2);
+  color: hsl(var(--foreground));
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Side beams to fill side emptiness elegantly */
+.side-beam {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 240px;
+  pointer-events: none;
+  opacity: 0.45;
+  mix-blend-mode: plus-lighter;
+  background: radial-gradient(closest-side, oklch(var(--primary) / 0.18), transparent 70%);
+  animation: beamPulse 6s ease-in-out infinite;
+}
+
+.side-beam.left {
+  left: 0;
+  transform: translateX(-30%);
+}
+
+.side-beam.right {
+  right: 0;
+  transform: translateX(30%);
+}
+
+@keyframes beamPulse {
+  0%, 100% { opacity: 0.35; transform: translateX(var(--x, -30%)) scaleY(1); }
+  50% { opacity: 0.6; transform: translateX(var(--x, -30%)) scaleY(1.05); }
+}
+
+/* Improved accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+  .particle-physics,
+  .floating-shape-3d,
+  .text-glow,
+  .magnetic-hover {
+    animation: none;
+  }
+
+  .scroll-animate {
+    transition: none;
+  }
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+  .perspective-1000 {
+    perspective: 500px;
+  }
+
+  .floating-shape-3d {
+    animation-duration: 8s;
+  }
+}
+
+.hero-title {
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-rendering: optimizeLegibility;
+}
+
+.hero-subtitle {
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+/* Improved contrast for muted text */
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+  opacity: 1; /* Removed opacity that was making text too light */
+}
+
+/* Added enhanced button hover effects */
+.btn-enhanced:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Added navigation smooth scroll offset */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* Added enhanced card hover effects */
+.card-enhanced {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-enhanced:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Added gradient text animation */
+@keyframes gradient-text {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.gradient-text-animated {
+  background: linear-gradient(
+    -45deg,
+    hsl(var(--primary)),
+    hsl(var(--secondary)),
+    hsl(var(--accent)),
+    hsl(var(--primary))
+  );
+  background-size: 400% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-text 3s ease infinite;
+}
+
+/* Added enhanced loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
