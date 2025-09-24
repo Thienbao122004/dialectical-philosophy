@@ -38,126 +38,126 @@ export default function QuizPage() {
 
   const questions = [
     {
-      question: "Theo Marx, cơ sở hạ tầng bao gồm những yếu tố nào?",
+      question: "Cơ sở hạ tầng của xã hội được định nghĩa như thế nào?",
       options: [
-        "Chỉ có lực lượng sản xuất",
-        "Lực lượng sản xuất và quan hệ sản xuất", 
-        "Chỉ có quan hệ sản xuất",
-        "Các thể chế chính trị"
+        "Các tổ chức chính trị và pháp luật",
+        "Nền tảng kinh tế bao gồm các quan hệ sản xuất",
+        "Các lĩnh vực nghệ thuật và tôn giáo",
+        "Các chính sách kinh tế của nhà nước"
       ],
       correct: 1,
-      explanation: "Cơ sở hạ tầng bao gồm cả lực lượng sản xuất (công nghệ, lao động) và quan hệ sản xuất (quan hệ sở hữu, phân phối).",
+      explanation: "Cơ sở hạ tầng là nền tảng kinh tế của xã hội, bao gồm hệ thống các quan hệ sản xuất.",
       difficulty: "Dễ"
     },
     {
-      question: "Kiến trúc thượng tầng là gì?",
+      question: "Kiến trúc thượng tầng bao gồm những yếu tố nào sau đây?",
       options: [
-        "Các công trình kiến trúc",
-        "Các thể chế chính trị, pháp lý, văn hóa",
-        "Phương tiện sản xuất",
-        "Quan hệ lao động"
+        "Quan hệ sản xuất và lực lượng sản xuất",
+        "Chính trị, pháp luật, tư tưởng, đạo đức, và các tổ chức như nhà nước",
+        "Công cụ sản xuất và kỹ thuật lao động",
+        "Phân phối của cải trong xã hội"
       ],
       correct: 1,
-      explanation: "Kiến trúc thượng tầng bao gồm các thể chế chính trị, pháp lý, văn hóa, tôn giáo được xây dựng trên nền tảng cơ sở hạ tầng.",
+      explanation: "Kiến trúc thượng tầng bao gồm chính trị, pháp luật, tư tưởng, đạo đức và các tổ chức xã hội.",
       difficulty: "Dễ"
     },
     {
-      question: "Mối quan hệ giữa cơ sở hạ tầng và kiến trúc thượng tầng là:",
+      question: "Cơ sở hạ tầng quyết định kiến trúc thượng tầng theo cách nào?",
       options: [
-        "Một chiều: thượng tầng quyết định cơ sở",
-        "Một chiều: cơ sở quyết định thượng tầng",
-        "Tương tác biện chứng qua lại",
-        "Hoàn toàn độc lập"
+        "Chỉ ảnh hưởng đến tư tưởng, không ảnh hưởng đến chính trị",
+        "Kinh tế quyết định chính trị và tư tưởng, ví dụ quan hệ tư bản tạo nhà nước tư bản",
+        "Chính trị quyết định hoàn toàn kinh tế",
+        "Không có mối liên hệ nào giữa hai yếu tố"
       ],
-      correct: 2,
-      explanation: "Đây là mối quan hệ tương tác biện chứng: cơ sở hạ tầng quyết định thượng tầng, nhưng thượng tầng cũng có thể phản tác động lại.",
+      correct: 1,
+      explanation: "Cơ sở kinh tế quyết định kiến trúc thượng tầng, ví dụ quan hệ sản xuất tư bản quyết định hình thành nhà nước tư bản.",
       difficulty: "Trung bình"
     },
     {
-      question: "Cách mạng công nghiệp là ví dụ cho:",
+      question: "Tác động ngược của kiến trúc thượng tầng đối với cơ sở hạ tầng thể hiện như thế nào?",
       options: [
-        "Thượng tầng quyết định cơ sở",
-        "Cơ sở hạ tầng thay đổi dẫn đến thay đổi thượng tầng",
-        "Sự độc lập của hai tầng",
-        "Vai trò của văn hóa"
+        "Chỉ kìm hãm sự phát triển kinh tế",
+        "Có thể thúc đẩy hoặc kìm hãm kinh tế, ví dụ chính sách đúng đắn giúp phát triển",
+        "Không ảnh hưởng đến kinh tế",
+        "Chỉ thúc đẩy tư tưởng, không ảnh hưởng kinh tế"
       ],
       correct: 1,
-      explanation: "Cách mạng công nghiệp thay đổi phương tiện sản xuất (cơ sở) dẫn đến hình thành giai cấp công nhân và thay đổi cấu trúc xã hội (thượng tầng).",
+      explanation: "Kiến trúc thượng tầng có thể tác động trở lại cơ sở hạ tầng theo hướng tích cực hoặc tiêu cực.",
       difficulty: "Trung bình"
     },
     {
-      question: "Quan điểm duy vật lịch sử của Marx nhấn mạnh:",
+      question: "Ứng dụng mối quan hệ biện chứng ở Việt Nam được thể hiện qua điều gì?",
       options: [
-        "Vai trò quyết định của ý thức",
-        "Vai trò quyết định của điều kiện vật chất",
-        "Vai trò của cá nhân vĩ đại",
-        "Tính ngẫu nhiên của lịch sử"
+        "Chỉ phát triển chính trị, bỏ qua kinh tế",
+        "Phát triển kinh tế là trung tâm, đổi mới chính trị thận trọng, giữ định hướng XHCN",
+        "Bỏ qua cả kinh tế và chính trị",
+        "Chỉ tập trung vào kinh tế thị trường tự do"
       ],
       correct: 1,
-      explanation: "Quan điểm duy vật lịch sử khẳng định điều kiện vật chất (cơ sở hạ tầng) quyết định ý thức và sự phát triển xã hội.",
+  explanation: "Việt Nam coi phát triển kinh tế là trung tâm, đồng thời đổi mới chính trị phù hợp để giữ định hướng XHCN.",
+      difficulty: "Khó"
+    },
+    {
+      question: "Hình thái kinh tế - xã hội được xác định bởi những yếu tố nào?",
+      options: [
+        "Chỉ lực lượng sản xuất",
+        "Lực lượng sản xuất, quan hệ sản xuất, và kiến trúc thượng tầng",
+        "Chỉ kiến trúc thượng tầng",
+        "Chỉ quan hệ sản xuất"
+      ],
+      correct: 1,
+      explanation: "Hình thái kinh tế - xã hội là sự thống nhất biện chứng giữa lực lượng sản xuất, quan hệ sản xuất và kiến trúc thượng tầng.",
       difficulty: "Trung bình"
     },
     {
-      question: "Tác phẩm nào đầu tiên trình bày chi tiết về mối quan hệ cơ sở - thượng tầng?",
+      question: "Tiến trình phát triển các hình thái kinh tế - xã hội theo thứ tự nào?",
       options: [
-        "Tư Bản",
-        "Ý Thức Hệ Đức",
-        "Phê Bình Kinh Tế Chính Trị",
-        "Tuyên Ngôn Đảng Cộng Sản"
+        "Phong kiến → Cộng sản nguyên thủy → Tư bản → Xã hội chủ nghĩa",
+        "Cộng sản nguyên thủy → Chiếm hữu nô lệ → Phong kiến → Tư bản → Xã hội chủ nghĩa",
+        "Tư bản → Phong kiến → Chiếm hữu nô lệ → Xã hội chủ nghĩa",
+        "Xã hội chủ nghĩa → Phong kiến → Tư bản → Chiếm hữu nô lệ"
       ],
       correct: 1,
-      explanation: "'Ý Thức Hệ Đức' (1845-1846) của Marx và Engels là tác phẩm đầu tiên trình bày hoàn chỉnh về khái niệm này.",
+      explanation: "Theo Marx, xã hội loài người phát triển qua 5 hình thái: cộng sản nguyên thủy → chiếm hữu nô lệ → phong kiến → tư bản → XHCN.",
       difficulty: "Khó"
     },
     {
-      question: "Trong xã hội hiện đại, Internet và AI thuộc về:",
+      question: "Động lực chính thúc đẩy sự thay đổi hình thái kinh tế - xã hội là gì?",
       options: [
-        "Kiến trúc thượng tầng",
-        "Cơ sở hạ tầng",
-        "Cả hai tầng",
-        "Không thuộc mô hình Marx"
+        "Sự thay đổi tư tưởng của con người",
+        "Sự phát triển của lực lượng sản xuất dẫn đến thay đổi quan hệ sản xuất",
+        "Sự can thiệp của nhà nước",
+        "Sự thay đổi tự nhiên không liên quan đến sản xuất"
       ],
-      correct: 2,
-      explanation: "Internet và AI vừa là phương tiện sản xuất (cơ sở) vừa tạo ra văn hóa số và thay đổi thể chế xã hội (thượng tầng).",
+      correct: 1,
+      explanation: "Mâu thuẫn giữa lực lượng sản xuất và quan hệ sản xuất là động lực cơ bản của sự phát triển xã hội.",
+      difficulty: "Trung bình"
+    },
+    {
+      question: "Sự \"bỏ qua\" giai đoạn tư bản chủ nghĩa của Việt Nam có ý nghĩa gì?",
+      options: [
+        "Bỏ qua mọi thành tựu kinh tế của thế giới",
+        "Tận dụng thành tựu nhân loại và vai trò lãnh đạo của Đảng để tiến lên XHCN",
+        "Chỉ tập trung vào nông nghiệp",
+        "Không liên quan đến sự phát triển xã hội"
+      ],
+      correct: 1,
+      explanation: "Việt Nam bỏ qua chế độ tư bản chủ nghĩa nhưng kế thừa thành tựu kinh tế, khoa học kỹ thuật của nhân loại.",
       difficulty: "Khó"
     },
     {
-      question: "Lực lượng sản xuất bao gồm:",
+      question: "Lý luận hình thái kinh tế - xã hội bác bỏ quan điểm nào sau đây?",
       options: [
-        "Chỉ có công nhân",
-        "Phương tiện sản xuất + sức lao động",
-        "Chỉ có máy móc",
-        "Quan hệ sở hữu"
+        "Chủ nghĩa xã hội là bước tiến tất yếu của nhân loại",
+  "Chủ nghĩa tư bản là điểm cuối của lịch sử (Fukuyama) và lịch sử là va chạm văn minh (Huntington)",
+        "Xã hội phát triển theo quy luật khách quan",
+        "Việt Nam cần tiếp thu khoa học công nghệ"
       ],
       correct: 1,
-      explanation: "Lực lượng sản xuất = phương tiện sản xuất (công cụ, máy móc) + sức lao động (con người với kỹ năng).",
-      difficulty: "Dễ"
-    },
-    {
-      question: "Theo Marx, thay đổi xã hội xuất phát từ:",
-      options: [
-        "Ý tưởng của các nhà tư tưởng",
-        "Mâu thuẫn trong cơ sở hạ tầng",
-        "Quyết định của nhà cầm quyền",
-        "Sự thay đổi văn hóa"
-      ],
-      correct: 1,
-      explanation: "Marx cho rằng thay đổi xã hội xuất phát từ mâu thuẫn giữa lực lượng sản xuất và quan hệ sản xuất trong cơ sở hạ tầng.",
-      difficulty: "Khó"
-    },
-    {
-      question: "Ý nghĩa của lý thuyết Marx trong thời đại hiện tại:",
-      options: [
-        "Đã lỗi thời hoàn toàn",
-        "Chỉ áp dụng cho xã hội cũ",
-        "Vẫn có giá trị để phân tích xã hội hiện đại",
-        "Chỉ có ý nghĩa lịch sử"
-      ],
-      correct: 2,
-      explanation: "Lý thuyết Marx vẫn cung cấp công cụ phân tích hữu ích để hiểu các hiện tượng xã hội, công nghệ và kinh tế đương đại.",
+      explanation: "Lý luận hình thái KT–XH bác bỏ quan điểm cho rằng tư bản là điểm cuối cùng hoặc lịch sử chỉ là va chạm văn minh.",
       difficulty: "Trung bình"
     }
-  ]
+  ];
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60)
