@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
@@ -8,6 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import Chatbox from "@/components/chatbox"
 import {
   ArrowDown,
   ArrowUp,
@@ -318,6 +320,24 @@ export default function HomePage() {
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Khám phá mô hình tương tác biện chứng</p>
+                </TooltipContent>
+              </Tooltip>
+              
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link href="/quiz">
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="hover:scale-105 transition-all duration-300 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-accent magnetic-hover"
+                    >
+                      <Brain className="mr-2 h-4 w-4" />
+                      Quiz
+                    </Button>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Kiểm tra kiến thức với 10 câu hỏi trắc nghiệm</p>
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -783,8 +803,8 @@ export default function HomePage() {
                 </DialogContent>
               </Dialog>
               
-              <Tooltip>
-                <TooltipTrigger asChild>
+                <Tooltip>
+                  <TooltipTrigger asChild>
                   <Button
                     variant="outline"
                     size="lg"
@@ -2441,8 +2461,10 @@ export default function HomePage() {
             setTimeout(() => particle.remove(), 2000);
           }
         }}
-      />
-      </div>
-    </TooltipProvider>
-  )
+        />
+        </div>
+        
+        <Chatbox />
+      </TooltipProvider>
+    )
 }
