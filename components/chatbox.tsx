@@ -150,8 +150,8 @@ const Chatbox = () => {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      <Card className="w-96 max-w-[95vw] h-[600px] max-h-[80vh] shadow-2xl border-0 bg-gradient-to-b from-white to-gray-50">
+    <div className="fixed bottom-6 right-6 z-50 p-0">
+      <Card className="w-96 max-w-[100vw] h-[600px] max-h-[80vh] shadow-2xl border-0 bg-gradient-to-b from-white to-gray-50 pt-0">
         <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-t-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">

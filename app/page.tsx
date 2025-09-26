@@ -123,6 +123,94 @@ export default function HomePage() {
     }
   }
 
+  // Disable F12 and DevTools
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Disable F12
+      if (e.key === 'F12') {
+        e.preventDefault()
+        e.stopPropagation()
+        return false
+      }
+      
+      // Disable Ctrl+Shift+I (DevTools)
+      if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault()
+        e.stopPropagation()
+        return false
+      }
+      
+      // Disable Ctrl+Shift+C (Element selector)
+      if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+        e.preventDefault()
+        e.stopPropagation()
+        return false
+      }
+      
+      // Disable Ctrl+Shift+J (Console)
+      if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+        e.preventDefault()
+        e.stopPropagation()
+        return false
+      }
+      
+      // Disable Ctrl+U (View source)
+      if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault()
+        e.stopPropagation()
+        return false
+      }
+    }
+    
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault()
+      return false
+    }
+    
+    const handleDragStart = (e: DragEvent) => {
+      e.preventDefault()
+      return false
+    }
+    
+    const handleSelectStart = (e: Event) => {
+      e.preventDefault()
+      return false
+    }
+    
+    // Additional DevTools detection
+    const detectDevTools = () => {
+      const threshold = 160
+      if (window.outerHeight - window.innerHeight > threshold || 
+          window.outerWidth - window.innerWidth > threshold) {
+        console.clear()
+        alert('Developer tools detected! Please close them.')
+        window.close()
+      }
+    }
+    
+    // Check for DevTools on resize
+    const handleResize = () => {
+      detectDevTools()
+    }
+    
+    // Monitor for DevTools opening
+    setInterval(detectDevTools, 1000)
+    
+    document.addEventListener('keydown', handleKeyDown, true)
+    document.addEventListener('contextmenu', handleContextMenu)
+    document.addEventListener('dragstart', handleDragStart)
+    document.addEventListener('selectstart', handleSelectStart)
+    window.addEventListener('resize', handleResize)
+    
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, true)
+      document.removeEventListener('contextmenu', handleContextMenu)
+      document.removeEventListener('dragstart', handleDragStart)
+      document.removeEventListener('selectstart', handleSelectStart)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   useEffect(() => {
     setIsLoaded(true)
     let ticking = false
@@ -277,10 +365,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="font-bold text-xl text-primary flex items-center group">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary via-secondary to-accent rounded-xl mr-3 flex items-center justify-center group-hover:rotate-180 transition-transform duration-500 shadow-lg">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl mr-3 flex items-center justify-center group-hover:rotate-180 transition-transform duration-500 shadow-lg">
                 <span className="text-primary-foreground font-bold text-lg">Φ</span>
               </div>
-              <span className="group-hover:text-secondary transition-colors duration-300 text-2xl">Biện Chứng</span>
+              <span className="group-hover:translate-x-2 transition-all duration-300 text-2xl">MLN</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
               {[
@@ -329,7 +417,7 @@ export default function HomePage() {
                     <Button
                       variant="default"
                       size="sm"
-                      className="hover:scale-105 transition-all duration-300 bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-accent magnetic-hover"
+                      className="hover:translate-x-2 transition-all duration-300 bg-primary/90 magnetic-hover"
                     >
                       <Brain className="mr-2 h-4 w-4" />
                       Quiz
@@ -456,7 +544,7 @@ export default function HomePage() {
                 <DialogTrigger asChild>
                   <Button
                     size="lg"
-                    className="text-xl px-12 py-8 hover:scale-110 transition-all duration-500 shadow-2xl hover:shadow-3xl bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-accent group magnetic-hover"
+                    className="text-xl px-12 py-8 hover:translate-x-2 transition-all duration-300 shadow-2xl hover:shadow-3xl bg-primary/90 hover:bg-primary group magnetic-hover"
                   >
                     <BookOpen className="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform duration-300" />
                     Khám Phá Ngay
@@ -464,7 +552,7 @@ export default function HomePage() {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-[95vw] max-h-[90vh] overflow-hidden w-[95vw] min-w-[900px]" style={{width: '75vw', maxWidth: '95vw'}}>
-                  <DialogHeader className="pb-6">
+                  <DialogHeader className="">
                     <div className="flex items-center space-x-3">
                       <div className="p-2 bg-gradient-to-br from-primary to-primary/80 rounded-lg">
                         <Brain className="h-6 w-6 text-primary-foreground" />
@@ -523,7 +611,7 @@ export default function HomePage() {
                           
                           <Card className="p-6 border-secondary/20 hover:border-secondary/40 transition-all duration-300">
                             <div className="flex items-center gap-3 mb-4">
-                              <Globe className="h-8 w-8 text-secondary" />
+                              <Globe className="h-8 w-8 text-primary" />
                               <h3 className="text-xl font-bold">Kiến Trúc Thượng Tầng</h3>
                             </div>
                             <p className="text-muted-foreground leading-relaxed mb-4">
@@ -717,28 +805,8 @@ export default function HomePage() {
                                     <p className="text-sm text-muted-foreground">{book.authors} • {book.year} • {book.pages} trang</p>
                                   </div>
                                   <div className="flex gap-2">
-                                    <Button size="sm" variant="outline" className="hover:bg-blue-50" onClick={() => {
-                                      const loading = document.createElement('div')
-                                      loading.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-[100]'
-                                      loading.innerHTML = `
-                                        <div class="bg-white rounded-lg p-8 text-center">
-                                          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                                          <p class="text-lg font-semibold">Đang chuẩn bị ${book.title}...</p>
-                                          <p class="text-sm text-gray-600 mt-2">Vui lòng đợi trong giây lát</p>
-                                        </div>
-                                      `
-                                      document.body.appendChild(loading)
-                                      
-                                      setTimeout(() => {
-                                        loading.remove()
-                                        alert('📥 File PDF đã sẵn sàng tải xuống!')
-                                      }, 2000)
-                                    }}>
-                                      <Download className="h-4 w-4 mr-1" />
-                                      PDF
-                                    </Button>
                                     <Button size="sm" variant="outline" className="hover:bg-green-50" onClick={() => {
-                                      window.open(`https://www.google.com/search?q=${encodeURIComponent(book.title + ' ' + book.authors + ' PDF')}`, '_blank')
+                                      window.open(`https://www.google.com/search?q=${encodeURIComponent(book.title + ' ' + book.authors)}`, '_blank')
                                     }}>
                                       <ExternalLink className="h-4 w-4" />
                                     </Button>
@@ -757,34 +825,13 @@ export default function HomePage() {
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                               {[
-                                { name: "Marxists Internet Archive", desc: "Bộ sưu tập tác phẩm đầy đủ", icon: ExternalLink },
-                                { name: "Stanford Encyclopedia", desc: "Bài viết học thuật chính thống", icon: BookOpen },
-                                { name: "Coursera Philosophy", desc: "Khóa học trực tuyến", icon: Play },
-                                { name: "Reddit r/philosophy", desc: "Cộng đồng thảo luận", icon: MessageCircle }
+                                { name: "Marxists Internet Archive", desc: "Bộ sưu tập tác phẩm đầy đủ", icon: ExternalLink, url: "https://www.marxists.org" },
+                                { name: "Stanford Encyclopedia", desc: "Bài viết học thuật chính thống", icon: BookOpen, url: "https://plato.stanford.edu" },
+                                { name: "Coursera Philosophy", desc: "Khóa học trực tuyến", icon: Play, url: "https://www.coursera.org/courses?query=philosophy" },
+                                { name: "Reddit r/philosophy", desc: "Cộng đồng thảo luận", icon: MessageCircle, url: "https://www.reddit.com/r/philosophy" }
                               ].map((resource, idx) => (
                                 <div key={idx} className="flex items-center gap-3 p-4 border rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all duration-300 cursor-pointer hover:shadow-md hover:scale-105" onClick={() => {
-                                  const popup = document.createElement('div')
-                                  popup.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-[100]'
-                                  popup.innerHTML = `
-                                    <div class="bg-white rounded-xl p-6 max-w-md mx-4">
-                                      <h3 class="text-xl font-bold mb-4 text-center">${resource.name}</h3>
-                                      <p class="text-gray-600 mb-6 text-center">${resource.desc}</p>
-                                      <div class="flex gap-3">
-                                        <button onclick="window.open('https://${resource.name.toLowerCase().includes('marxists') ? 'marxists.org' : resource.name.toLowerCase().includes('stanford') ? 'plato.stanford.edu' : resource.name.toLowerCase().includes('coursera') ? 'coursera.org' : 'reddit.com/r/philosophy'}', '_blank')" 
-                                          class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
-                                          🚀 Truy cập ngay
-                                        </button>
-                                        <button onclick="this.closest('.fixed').remove()" 
-                                          class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                                          Đóng
-                                        </button>
-                                      </div>
-                                    </div>
-                                  `
-                                  document.body.appendChild(popup)
-                                  popup.onclick = (e) => {
-                                    if (e.target === popup) popup.remove()
-                                  }
+                                  window.open(resource.url, '_blank')
                                 }}>
                                   <resource.icon className="h-6 w-6 text-accent" />
                                   <div>
@@ -808,10 +855,10 @@ export default function HomePage() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="text-xl px-12 py-8 bg-background/50 hover:scale-110 transition-all duration-500 hover:bg-gradient-to-r hover:from-accent/20 hover:to-primary/20 group magnetic-hover border-2"
+                    className="text-xl px-12 py-8 bg-background/50 hover:translate-x-2 transition-all duration-300 group magnetic-hover border-2"
                     onClick={() => scrollToSection('interactive')}
                   >
-                    <Lightbulb className="mr-3 h-6 w-6 group-hover:text-accent transition-colors duration-300" />
+                    <Lightbulb className="mr-3 h-6 w-6 transition-colors duration-300" />
                     Tương Tác Trực Quan
                   </Button>
                 </TooltipTrigger>
@@ -918,10 +965,10 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <CardContent className="p-0 relative z-10">
                   <div className="flex items-center mb-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/80 rounded-xl flex items-center justify-center mr-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center mr-4 shadow-lg group-hover:scale-110 transition-transform duration-300">
                       <span className="text-3xl">🏛️</span>
                     </div>
-                    <h3 className="text-3xl font-bold text-secondary">Kiến Trúc Thượng Tầng</h3>
+                    <h3 className="text-3xl font-bold text-primary">Kiến Trúc Thượng Tầng</h3>
                   </div>
                   <p className="text-muted-foreground leading-relaxed mb-6 text-lg">
                     Các thể chế chính trị, pháp lý, văn hóa, tôn giáo và ý thức hệ được xây dựng trên nền tảng cơ sở hạ
@@ -932,7 +979,7 @@ export default function HomePage() {
                       (item, index) => (
                         <div key={index} className="flex items-center text-muted-foreground">
                           <div
-                            className="w-2 h-2 bg-secondary rounded-full mr-3 group-hover:scale-150 transition-transform duration-300"
+                            className="w-2 h-2 bg-primary rounded-full mr-3 group-hover:scale-150 transition-transform duration-300"
                             style={{ animationDelay: `${index * 0.1}s` }}
                           />
                           {item}
@@ -1444,7 +1491,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <h3 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent vietnamese-text">
+            <h3 className="text-4xl md:text-5xl font-bold mb-8 bg-primary/90 from-primary via-secondary to-accent bg-clip-text text-transparent vietnamese-text">
               Khám Phá Sâu Hơn
             </h3>
             <p className="text-foreground mb-12 max-w-3xl mx-auto text-pretty leading-relaxed text-lg vietnamese-text">
@@ -1457,7 +1504,7 @@ export default function HomePage() {
                 <DialogTrigger asChild>
                   <Button
                     size="lg"
-                    className="text-lg px-12 py-6 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-accent group"
+                    className="text-lg px-12 py-6 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl bg-primary/90 hover:bg-primary group"
                   >
                     <BookOpen className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
                     Tìm Hiểu Thêm
@@ -1478,7 +1525,7 @@ export default function HomePage() {
                   </DialogHeader>
                   
                   <Tabs defaultValue="books" className="w-full">
-                    <TabsList className="grid w-full grid-cols-4 bg-muted p-1 h-auto">
+                    <TabsList className="grid w-full grid-cols-3 bg-muted p-1 h-auto">
                       <TabsTrigger value="books" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm font-medium py-3">
                         <BookOpen className="h-4 w-4" />
                         Sách Kinh Điển
@@ -1491,10 +1538,10 @@ export default function HomePage() {
                         <Globe className="h-4 w-4" />
                         Tài Nguyên Online
                       </TabsTrigger>
-                      <TabsTrigger value="tools" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm font-medium py-3">
+                      {/* <TabsTrigger value="tools" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm font-medium py-3">
                         <Settings className="h-4 w-4" />
                         Công Cụ
-                      </TabsTrigger>
+                      </TabsTrigger> */}
                     </TabsList>
                     
                     <div className="mt-6 max-h-[60vh] overflow-y-auto">
@@ -1763,12 +1810,12 @@ export default function HomePage() {
                               users: "320K"
                             },
                             {
-                              name: "Critical Theory Podcast",
-                              desc: "Podcast về lý thuyết phê bình và Marx",
-                              url: "https://criticaltheory.podcast",
+                              name: "Philosophize This! Podcast",
+                              desc: "Podcast về triết học và lý thuyết phê bình",
+                              url: "https://open.spotify.com/show/2k6RfwNUaHGbbXZUm6tvVU",
                               icon: Volume2,
                               type: "Podcast",
-                              rating: 4.5,
+                              rating: 4.7,
                               users: "180K"
                             }
                           ].map((resource, idx) => (
@@ -1890,14 +1937,6 @@ export default function HomePage() {
               
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="text-lg px-12 py-6 bg-background/50 hover:scale-105 transition-all duration-300 hover:bg-gradient-to-r hover:from-accent/10 hover:to-primary/10 group"
-                  >
-                    <Users className="mr-2 h-5 w-5 group-hover:text-secondary transition-colors duration-300" />
-                    Tham Gia Thảo Luận
-                  </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-[95vw] max-h-[90vh] overflow-hidden w-[95vw] min-w-[900px]" style={{width: '95vw', maxWidth: '95vw'}}>
                   <DialogHeader className="pb-6">
@@ -1943,7 +1982,9 @@ export default function HomePage() {
                               activity: "Rất cao",
                               icon: Facebook,
                               color: "blue",
-                              badge: "Phổ biến"
+                              badge: "Phổ biến",
+                              url: "https://www.facebook.com/groups/triethocVietNam",
+                              joinUrl: "https://www.facebook.com/groups/triethocVietNam"
                             },
                             {
                               name: "Reddit - r/philosophy",
@@ -1952,7 +1993,9 @@ export default function HomePage() {
                               activity: "Cao",
                               icon: MessageCircle,
                               color: "orange",
-                              badge: "Toàn cầu"
+                              badge: "Toàn cầu",
+                              url: "https://www.reddit.com/r/philosophy",
+                              joinUrl: "https://www.reddit.com/r/philosophy"
                             },
                             {
                               name: "Discord - Philosophy Hub",
@@ -1961,7 +2004,9 @@ export default function HomePage() {
                               activity: "Trung bình",
                               icon: MessageCircle,
                               color: "purple",
-                              badge: "Tương tác"
+                              badge: "Tương tác",
+                              url: "https://discord.gg/philosophy",
+                              joinUrl: "https://discord.gg/philosophy"
                             },
                             {
                               name: "LinkedIn - Marxist Studies",
@@ -1970,10 +2015,12 @@ export default function HomePage() {
                               activity: "Cao",
                               icon: Linkedin,
                               color: "blue",
-                              badge: "Chuyên nghiệp"
+                              badge: "Chuyên nghiệp",
+                              url: "https://www.linkedin.com/groups/philosophy",
+                              joinUrl: "https://www.linkedin.com/groups/philosophy"
                             }
                           ].map((platform, idx) => (
-                            <Card key={idx} className="p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group">
+                            <Card key={idx} className="p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group" onClick={() => window.open(platform.url, '_blank')}>
                               <div className="flex items-start justify-between">
                                 <div className="flex items-start gap-4 flex-1">
                                   <div className={`p-3 bg-${platform.color}-100 rounded-lg group-hover:scale-110 transition-transform duration-300`}>
@@ -1997,12 +2044,12 @@ export default function HomePage() {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="flex gap-2 ml-4">
-                                  <Button size="sm" variant="outline">
+                                <div className="flex gap-2 ml-4" onClick={(e) => e.stopPropagation()}>
+                                  <Button size="sm" variant="outline" onClick={() => window.open(platform.url, '_blank')}>
                                     <ExternalLink className="h-4 w-4 mr-1" />
                                     Truy cập
                                   </Button>
-                                  <Button size="sm">
+                                  <Button size="sm" onClick={() => window.open(platform.joinUrl, '_blank')}>
                                     Tham gia
                                   </Button>
                                 </div>
@@ -2360,93 +2407,7 @@ export default function HomePage() {
       </section>
 
       {/* Floating Action Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <div className={`space-y-3 transition-all duration-300 ${showFloatingMenu ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                size="lg"
-                className="w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-primary/80"
-                onClick={() => scrollToSection('hero')}
-              >
-                <ArrowUp className="h-6 w-6" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="left">
-              <p>Về đầu trang</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                size="lg"
-                variant="secondary"
-                className="w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                onClick={() => window.open('https://t.me/dialectical_philosophy', '_blank')}
-              >
-                <MessageCircle className="h-6 w-6" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="left">
-              <p>Chat trực tiếp</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-background"
-                onClick={() => navigator.share ? navigator.share({
-                  title: 'Mối Quan Hệ Biện Chứng',
-                  text: 'Khám phá triết học Marxist về mối quan hệ giữa cơ sở hạ tầng và kiến trúc thượng tầng',
-                  url: window.location.href
-                }) : navigator.clipboard.writeText(window.location.href)}
-              >
-                <Share2 className="h-6 w-6" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="left">
-              <p>Chia sẻ trang</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-background"
-                onClick={() => {
-                  const bookmarkData = {
-                    title: 'Mối Quan Hệ Biện Chứng - Triết Học Marxist',
-                    url: window.location.href
-                  };
-                  localStorage.setItem('dialectical_bookmark', JSON.stringify(bookmarkData));
-                  alert('Đã lưu trang vào bookmark!');
-                }}
-              >
-                <Bookmark className="h-6 w-6" />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="left">
-              <p>Lưu bookmark</p>
-            </TooltipContent>
-          </Tooltip>
-        </div>
-        
-        <Button
-          size="lg"
-          className={`w-16 h-16 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 mt-3 bg-gradient-to-r from-accent to-accent/80 ${showFloatingMenu ? 'rotate-45' : ''}`}
-          onClick={() => setShowFloatingMenu(!showFloatingMenu)}
-        >
-          <Settings className="h-8 w-8" />
-        </Button>
-      </div>
 
-      {/* Interactive Easter Egg - Click particles */}
       <div
         className="fixed inset-0 pointer-events-none z-40"
         onClick={(e) => {

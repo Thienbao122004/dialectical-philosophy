@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -35,6 +35,48 @@ export default function QuizPage() {
   const [quizStarted, setQuizStarted] = useState(false)
   const [showReview, setShowReview] = useState(false)
   const [expandedQuestion, setExpandedQuestion] = useState<number | null>(null)
+  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null)
+
+  // Disable F12 and DevTools
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'F12' || 
+          (e.ctrlKey && e.shiftKey && ['I', 'C', 'J'].includes(e.key)) ||
+          (e.ctrlKey && e.key === 'u')) {
+        e.preventDefault()
+        e.stopPropagation()
+        return false
+      }
+    }
+    
+    const handleContextMenu = () => false
+    const handleDragStart = () => false
+    const handleSelectStart = () => false
+    
+    const detectDevTools = () => {
+      const threshold = 160
+      if (window.outerHeight - window.innerHeight > threshold || 
+          window.outerWidth - window.innerWidth > threshold) {
+        console.clear()
+        alert('Please close Developer tools before continuing!')
+      }
+    }
+    
+    document.addEventListener('keydown', handleKeyDown, true)
+    document.addEventListener('contextmenu', handleContextMenu)
+    document.addEventListener('dragstart', handleDragStart)  
+    document.addEventListener('selectstart', handleSelectStart)
+    window.addEventListener('resize', detectDevTools)
+    setInterval(detectDevTools, 1000)
+    
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown, true)
+      document.removeEventListener('contextmenu', handleContextMenu)
+      document.removeEventListener('dragstart', handleDragStart)
+      document.removeEventListener('selectstart', handleSelectStart)
+      window.removeEventListener('resize', detectDevTools)
+    }
+  }, [])
 
   const questions = [
     {
@@ -171,6 +213,7 @@ export default function QuizPage() {
       setTimeLeft(prev => {
         if (prev <= 1) {
           clearInterval(timer)
+          setTimerId(null)
           setShowQuizResult(true)
           const score = questions.reduce((acc, q, index) => {
             return acc + (selectedAnswers[index] === q.correct ? 1 : 0)
@@ -181,9 +224,14 @@ export default function QuizPage() {
         return prev - 1
       })
     }, 1000)
+    setTimerId(timer)
   }
 
   const resetQuiz = () => {
+    if (timerId) {
+      clearInterval(timerId)
+      setTimerId(null)
+    }
     setCurrentQuiz(0)
     setSelectedAnswers({})
     setShowQuizResult(false)
@@ -403,6 +451,10 @@ export default function QuizPage() {
                   {currentQuiz === 9 ? (
                     <Button
                       onClick={() => {
+                        if (timerId) {
+                          clearInterval(timerId)
+                          setTimerId(null)
+                        }
                         const score = questions.reduce((acc, q, index) => {
                           return acc + (selectedAnswers[index] === q.correct ? 1 : 0)
                         }, 0)
@@ -639,27 +691,6 @@ export default function QuizPage() {
                   <Share2 className="h-4 w-4 mr-2" />
                   Chia Sẻ Kết Quả
                 </Button>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-r from-purple-100 to-blue-100 rounded-xl p-6">
-              <h3 className="text-xl font-bold mb-4">🎯 Muốn cải thiện điểm số?</h3>
-              <div className="grid md:grid-cols-3 gap-4 text-sm">
-                <div className="bg-white p-4 rounded-lg">
-                  <BookOpen className="h-6 w-6 text-blue-600 mb-2" />
-                  <h4 className="font-semibold mb-1">Đọc Thêm Tài Liệu</h4>
-                  <p className="text-gray-600">Khám phá thêm về triết học Marx</p>
-                </div>
-                <div className="bg-white p-4 rounded-lg">
-                  <TrendingUp className="h-6 w-6 text-green-600 mb-2" />
-                  <h4 className="font-semibold mb-1">Luyện Tập Thêm</h4>
-                  <p className="text-gray-600">Làm lại quiz để củng cố kiến thức</p>
-                </div>
-                <div className="bg-white p-4 rounded-lg">
-                  <Target className="h-6 w-6 text-purple-600 mb-2" />
-                  <h4 className="font-semibold mb-1">Tham Gia Thảo Luận</h4>
-                  <p className="text-gray-600">Kết nối với cộng đồng học tập</p>
-                </div>
               </div>
             </div>
           </div>
